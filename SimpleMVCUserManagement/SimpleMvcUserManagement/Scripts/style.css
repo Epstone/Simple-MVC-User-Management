@@ -1,0 +1,25 @@
+﻿#simple-user-info {
+  padding: 15px 0;
+  text-align:center;  
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  position: relative;
+  color: #00529B;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  filter:alpha(opacity=95); /* IE */
+-moz-opacity: 0.95; /* Mozilla */
+opacity: 0.95; /* Opera */
+}
+#simple-user-info.error {
+  background-color: Yellow;
+}
+#simple-user-info.success {
+  background-color: Lime;
+}
+
+
+#add-user-form,#manage-roles-form{
+  display:inline-block
+}

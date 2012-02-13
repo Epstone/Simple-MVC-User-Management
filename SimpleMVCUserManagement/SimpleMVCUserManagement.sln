@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Web Developer Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMvcUserManagement", "SimpleMvcUserManagement\SimpleMvcUserManagement.csproj", "{CE56D7F8-7CDB-440A-BC04-40DEC1612252}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementExample", "UserManagementExample\UserManagementExample\UserManagementExample.csproj", "{5F63E506-E9D0-42E2-8B7F-A3D9D7B0B91A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE56D7F8-7CDB-440A-BC04-40DEC1612252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE56D7F8-7CDB-440A-BC04-40DEC1612252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE56D7F8-7CDB-440A-BC04-40DEC1612252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE56D7F8-7CDB-440A-BC04-40DEC1612252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F63E506-E9D0-42E2-8B7F-A3D9D7B0B91A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F63E506-E9D0-42E2-8B7F-A3D9D7B0B91A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F63E506-E9D0-42E2-8B7F-A3D9D7B0B91A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F63E506-E9D0-42E2-8B7F-A3D9D7B0B91A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

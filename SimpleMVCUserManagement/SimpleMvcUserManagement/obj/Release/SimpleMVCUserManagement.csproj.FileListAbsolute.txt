@@ -1,0 +1,5 @@
+D:\Projekte\Simple-MVC-User-Management\SimpleMVCUserManagement\bin\Release\SimpleMVCUserManagement.dll
+D:\Projekte\Simple-MVC-User-Management\SimpleMVCUserManagement\bin\Release\SimpleMVCUserManagement.pdb
+D:\Projekte\Simple-MVC-User-Management\SimpleMVCUserManagement\obj\Release\ResolveAssemblyReference.cache
+D:\Projekte\Simple-MVC-User-Management\SimpleMVCUserManagement\obj\Release\SimpleMVCUserManagement.dll
+D:\Projekte\Simple-MVC-User-Management\SimpleMVCUserManagement\obj\Release\SimpleMVCUserManagement.pdb

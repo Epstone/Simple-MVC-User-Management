@@ -1,0 +1,45 @@
+﻿<table class='simple-user-table'>
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Name
+			</th>
+			<th>
+				Registration
+			</th>
+			<th>
+				E-Mail
+			</th>
+			<th>
+				LockIn/Out
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+<script type='text/javascript'>
+
+	$(function () {
+
+		$.post('/UserManagementController/GetUsers', {}, function (users) {
+
+		// add users to table
+			for (var user in users) {
+
+				var row = '<tr>'
+						+ '<td>' + user.name + '</td>' 
+						+ '</tr>';
+			}
+
+
+		})
+
+
+	});
+
+
+</script>
