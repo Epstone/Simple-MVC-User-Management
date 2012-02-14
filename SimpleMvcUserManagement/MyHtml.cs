@@ -13,14 +13,14 @@ namespace SimpleMvcUserManagement
     const string _styleSheetBlock = "<style type='text/css'>{0}</style>";
     const string _javascriptBlock = "<script type='text/javascript'>{0}</script>";
 
-    public static string UserTableArea()
+    public static IHtmlString UserTableArea()
     {
       string tableHtml = ScriptPack.user_table_area;
 
-      return tableHtml;
+      return new HtmlString( tableHtml);
     }
 
-    public static string TableJavaScript()
+    public static IHtmlString TableJavaScript()
     {
       var builder = new StringBuilder();
       builder.AppendFormat(_javascriptBlock, ScriptPack.jquery_tablesorter_min);
@@ -31,29 +31,35 @@ namespace SimpleMvcUserManagement
 
       builder.AppendFormat(_javascriptBlock, ScriptPack.simple_user_management.Replace("{controllerName}", "UserManagement"));
 
-      return builder.ToString();
+      return new HtmlString(builder.ToString());
     }
 
-    public static string TableCss()
+    public static IHtmlString TableCss()
     {
       var builder = new StringBuilder();
       builder.AppendFormat(_styleSheetBlock, ScriptPack.tablesorter_style);
 
-      return builder.ToString();
+      return new HtmlString(builder.ToString());
     }
-    public static string StyleCss()
+    public static IHtmlString StyleCss()
     {
-      return string.Format(_styleSheetBlock, ScriptPack.style);
-    }
-
-    public static string AddUserForm()
-    {
-      return ScriptPack.add_user_form;
+      var styleBlock = string.Format(_styleSheetBlock, ScriptPack.style);
+     
+      return new HtmlString(styleBlock);
     }
 
-    public static string ManageRolesForm()
+    public static IHtmlString AddUserForm()
     {
-      return ScriptPack.manage_roles_form;
+      var addUserForm = ScriptPack.add_user_form;
+      
+      return new HtmlString(addUserForm);
+    }
+
+    public static IHtmlString ManageRolesForm()
+    {
+      var manageRolesForm = ScriptPack.manage_roles_form;
+
+      return new HtmlString(manageRolesForm);
     }
 
 

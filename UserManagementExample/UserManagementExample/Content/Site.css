@@ -191,7 +191,7 @@ textarea {
 }
 
 input[type="text"], 
-input[type="password"] {
+input[type="password"],select {
     border: 1px solid #ccc;
     padding: 2px;
     font-size: 1.2em;
@@ -217,6 +217,7 @@ input[type="submit"] {
 table {
     border: solid 1px #e8eef4;
     border-collapse: collapse;
+    width:50%;
 }
 
 table td {
