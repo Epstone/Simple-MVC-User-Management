@@ -68,7 +68,7 @@ namespace SimpleMvcUserManagement
       {
         id = user.ProviderUserKey,
         name = user.UserName,
-        registrationDate = user.CreationDate.ToShortDateString(),
+        registrationDate = user.CreationDate.ToString("yyyy-MM-dd"),
         email = user.Email,
         isLockedOut = user.IsLockedOut
       };
