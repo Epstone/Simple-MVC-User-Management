@@ -20,8 +20,8 @@ namespace SimpleMvcUserManagement
     }
     public UserAccountService(MembershipProvider membershipProvider, RoleProvider roleProvider)
     {
-      this._membership = membershipProvider ?? UserManagementController.MembershipProvider ?? Membership.Provider;
-      this._roleProvider = roleProvider ?? UserManagementController.RoleProvider ?? Roles.Provider;
+      this._membership = membershipProvider ?? Membership.Provider;
+      this._roleProvider = roleProvider  ?? Roles.Provider;
     }
 
     public MembershipUserCollection GetAllUsers(int page, int size, out int totalRecords)

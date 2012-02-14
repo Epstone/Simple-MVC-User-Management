@@ -3,3 +3,8 @@ D:\Projekte\Simple-MVC-User-Management\SimpleMVCUserManagement\UserManagementExa
 D:\Projekte\Simple-MVC-User-Management\SimpleMVCUserManagement\UserManagementExample\UserManagementExample\obj\Debug\ResolveAssemblyReference.cache
 D:\Projekte\Simple-MVC-User-Management\SimpleMVCUserManagement\UserManagementExample\UserManagementExample\obj\Debug\UserManagementExample.dll
 D:\Projekte\Simple-MVC-User-Management\SimpleMVCUserManagement\UserManagementExample\UserManagementExample\obj\Debug\UserManagementExample.pdb
+D:\Projekte\Simple-MVC-User-Management\UserManagementExample\UserManagementExample\bin\UserManagementExample.dll
+D:\Projekte\Simple-MVC-User-Management\UserManagementExample\UserManagementExample\bin\UserManagementExample.pdb
+D:\Projekte\Simple-MVC-User-Management\UserManagementExample\UserManagementExample\obj\Debug\ResolveAssemblyReference.cache
+D:\Projekte\Simple-MVC-User-Management\UserManagementExample\UserManagementExample\obj\Debug\UserManagementExample.dll
+D:\Projekte\Simple-MVC-User-Management\UserManagementExample\UserManagementExample\obj\Debug\UserManagementExample.pdb

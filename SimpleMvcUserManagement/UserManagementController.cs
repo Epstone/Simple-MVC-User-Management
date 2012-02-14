@@ -14,7 +14,7 @@ namespace SimpleMvcUserManagement
     public static MembershipProvider MembershipProvider { get; set; }
     public static RoleProvider RoleProvider { get; set; }
     IUserAccountService _accountService { get; set; }
-    
+
     public static void RegisterMe()
     {
 
@@ -37,7 +37,11 @@ namespace SimpleMvcUserManagement
     protected override void Initialize(RequestContext requestContext)
     {
       base.Initialize(requestContext);
-      if (this._accountService == null) this._accountService = new UserAccountService();
+
+      var roleProvider = RoleProvider ?? Roles.Provider;
+      var membershipProvider = MembershipProvider ?? Membership.Provider;
+
+      if (this._accountService == null) this._accountService = new UserAccountService(membershipProvider, roleProvider);
     }
 
     /// <summary>
@@ -180,6 +184,6 @@ namespace SimpleMvcUserManagement
       return Json(result);
     }
 
-    
+
   }
 }
