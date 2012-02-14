@@ -1,0 +1,9 @@
+Simple MVC User Management is a ajax based user management solution for smaller for asp.net mvc projects. 
+It contains an controller and a html helper which produces widgets for managing users and roles.
+
+Features: 
+- Paged list of all users with delete function
+- Create new users
+- Create / Delete roles
+
+
