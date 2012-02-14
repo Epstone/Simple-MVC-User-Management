@@ -46,17 +46,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountValidation.cs" />
+    <Compile Include="IUserAccountService.cs" />
     <Compile Include="MyJsonResult.cs" />
-    <Compile Include="IMembershipService.cs" />
     <Compile Include="Scripts\ScriptPack.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScriptPack.resx</DependentUpon>
     </Compile>
-    <Compile Include="SimpleUserManagementHtml.cs" />
+    <Compile Include="MyHtml.cs" />
     <Compile Include="UserManagementController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserManagementService.cs" />
+    <Compile Include="UserAccountService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\add-user-form.html" />
