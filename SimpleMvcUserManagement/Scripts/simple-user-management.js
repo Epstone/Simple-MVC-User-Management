@@ -1,14 +1,15 @@
 ﻿
 $(function () {
 
-  var userTableArea = new UserTableArea();
-  userTableArea.init(".simple-user-table");
-
   var addUserArea = new AddUserArea();
   addUserArea.init(".simple-user-table");
 
   var roleMgmt = new RoleManagement();
   roleMgmt.init();
+
+  var userTableArea = new UserTableArea();
+  userTableArea.init(".simple-user-table");
+
 });
 
 
@@ -100,6 +101,7 @@ function AddUserArea() {
   function createUser(e) {
 
     e.preventDefault();
+    e.stopPropagation();
 
     var username = $("#tbx-add-username").val();
     var pwd = $("#tbx-add-password").val();
@@ -182,6 +184,7 @@ function RoleManagement() {
     $("#btn-add-role").click(function (e) {
 
       e.stopPropagation();
+      e.preventDefault();
       var rolename = $("#role-name").val();
 
       //check that the role input is not empty
@@ -215,6 +218,7 @@ function RoleManagement() {
     $("#btn-delete-role").click(function (e) {
 
       e.stopPropagation();
+      e.preventDefault();
       var selectedOption = roleSelectBox.children(":selected");
 
       if (selectedOption.length === 1) {
