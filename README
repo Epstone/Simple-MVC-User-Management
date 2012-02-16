@@ -1,9 +1,20 @@
-Simple MVC User Management is a ajax based user management solution for smaller for asp.net mvc projects. 
-It contains an controller and a html helper which produces widgets for managing users and roles.
+Current State: In Development
+
+Simple MVC User Management is a user management solution to quickstart your ASP.NET MVC project. 
+It contains one controller for answering client requests and a html helper which produces html widgets for managing users and roles. 
+Please note that this solution is ajax/javascript only and all account information is transferred through ajax requests.
+
+You can watch a demo of the latest development version at http://usermanagementdemo.apphb.com. 
+(The providers used for the demo are only incomplete dummies!)
+
+Dependencies: 
+- jQuery 1.7
 
 Features: 
-- Paged list of all users with delete function
-- Create new users
-- Create / Delete roles
+- Paged user list by using mottie's tablsorter fork and pager plugin (included in HtmlHelper)
+- Create / delete user accounts
+- Create / delete roles
+- Success/Error messages through horizontal overlay
+- Custom user authorization check in global.asax
 
-
+Licence: Under MIT or GPL licenses, just pick one.
