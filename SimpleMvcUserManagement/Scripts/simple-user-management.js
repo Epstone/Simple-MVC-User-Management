@@ -53,6 +53,7 @@ function UserTableArea() {
   function deleteUser(e) {
 
     e.preventDefault();
+
     var id = $(this).data("user-id");
     var row = $(this).closest("tr");
 
@@ -245,7 +246,7 @@ function RoleManagement() {
       });
 
     });
-  
+
   }
 
 }
@@ -295,25 +296,23 @@ var _myHelper = {
 
   showError: function (msg) { _myHelper.showMessage(msg, "error"); },
 
+  /* returns the info window element and creates one if it is not yet existing */
+  infoWindow: function () {
+
+    //remove old info window
+    $("#simple-user-info").remove();
+
+    //add new one
+    return $("<div/>").attr("id", "simple-user-info")
+               .appendTo("body");
+  },
+
   /* Shows an error or success notification */
   showMessage: function (message, cssClass) {
 
-    var id = "simple-user-info";
+    var $info = _myHelper.infoWindow().addClass(cssClass).text(message);
 
-    //remove all old info windows
-    var oldInfo = $("#" + id);
-    if (oldInfo)
-      oldInfo.remove();
-
-    var $info = $("<div/>").text(message).attr("id", id).addClass(cssClass)
-                          .appendTo("body")
-                          .fadeIn(1000).on("mouseover", fadeOutInfoWindow);
-
-    // Hide the info window after some seconds
-    setTimeout(fadeOutInfoWindow, 4000);
-
-    //click anywhere to remove info window
-    $(document).one("click", fadeOutInfoWindow);
+    $info.fadeIn(1000).on("mouseover", fadeOutInfoWindow).delay(4000).fadeOut();
 
     //fadeOut info window
     function fadeOutInfoWindow() {

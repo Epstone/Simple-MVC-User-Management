@@ -5,9 +5,14 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.Routing;
+using System.Collections;
+using System.Web;
+using System.Web.UI;
+
 
 namespace SimpleMvcUserManagement
 {
+  [UserManagementAuthorization]
   public class UserManagementController : Controller
   {
 
@@ -180,10 +185,39 @@ namespace SimpleMvcUserManagement
       {
         result = MyJsonResult.CreateError(ex.Message);
       }
+      
 
       return Json(result);
     }
 
 
+    const string _isAuthorized ="IsAuthorizedForUserManagement";
+
+    public static bool IsRequestAuthorized
+    {
+      
+      get
+      {
+        IDictionary items = System.Web.HttpContext.Current.Items;
+        if (!items.Contains(_isAuthorized))
+        {
+          items[_isAuthorized] = false;
+        }
+        return (bool)items[_isAuthorized];
+      }
+
+      set
+      {
+        IDictionary items = System.Web.HttpContext.Current.Items;
+        if (!items.Contains(_isAuthorized))
+        {
+          items[_isAuthorized] = value;
+        }
+        else
+        {
+          items[_isAuthorized] = value;
+        }
+      }
+    }
   }
 }

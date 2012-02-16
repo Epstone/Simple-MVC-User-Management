@@ -46,6 +46,11 @@ namespace UserManagementExample
       UserManagementController.RoleProvider = DummyProviders.CreateDummyRoleProvider();
 
     }
+    protected void Application_AuthenticateRequest()
+    {
+      // allow or deny requests to the user management controller
+      UserManagementController.IsRequestAuthorized = true;
+    }
 
     
   }
