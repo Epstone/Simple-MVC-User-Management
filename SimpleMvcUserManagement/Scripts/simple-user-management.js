@@ -33,7 +33,7 @@ function UserTableArea() {
       }
 
       //initialize table sorter and pager
-      userTable.tablesorter({ widthFixed: true, widgets: ['zebra'] }).tablesorterPager({ container: $("#pager"), positionFixed: false });
+      userTable.tablesorter({ widthFixed: true, widgets: ['zebra'] }).tablesorterPager({ container: $("#pager"), positionFixed: false, removeRows: false });
 
       // bind user link deletion event handler for all rows
       userTable.on('click', '.delete-user', deleteUser);
@@ -101,9 +101,6 @@ function AddUserArea() {
   /* Creates a new user if all field data is valid */
   function createUser(e) {
 
-    e.preventDefault();
-    e.stopPropagation();
-
     var username = $("#tbx-add-username").val();
     var pwd = $("#tbx-add-password").val();
     var pwd2 = $("#tbx-add-repeat-password").val();
@@ -116,9 +113,9 @@ function AddUserArea() {
 
     console.log(roles);
     //verify that both passwords are equal
-    if (pwd !== pwd2 || pwd === "") {
-      _myHelper.showError("The passwords are empty or do not match.");
-      return;
+    if (pwd !== pwd2 || pwd === "" || username === "" || email === "") {
+      _myHelper.showError("You have missed something or the passwords do not match.");
+      return false;
     }
 
     var postData = { username: username,
@@ -126,8 +123,8 @@ function AddUserArea() {
       email: email,
       roles: roles
     };
+    
     //send user creation request to server
-
     $.ajax({
       type: "POST",
       url: "/{controllerName}/CreateUser",
@@ -147,6 +144,7 @@ function AddUserArea() {
       }
     });
 
+    return false;
   }
 }
 
@@ -184,8 +182,7 @@ function RoleManagement() {
 
     $("#btn-add-role").click(function (e) {
 
-      e.stopPropagation();
-      e.preventDefault();
+
       var rolename = $("#role-name").val();
 
       //check that the role input is not empty
@@ -196,6 +193,7 @@ function RoleManagement() {
         addRole(rolename);
       }
 
+      return false;
     });
 
 
@@ -218,8 +216,6 @@ function RoleManagement() {
 
     $("#btn-delete-role").click(function (e) {
 
-      e.stopPropagation();
-      e.preventDefault();
       var selectedOption = roleSelectBox.children(":selected");
 
       if (selectedOption.length === 1) {
@@ -231,6 +227,8 @@ function RoleManagement() {
       } else {
         _myHelper.showError("You have not selected a role to delete.");
       }
+
+      return false;
     });
 
   }

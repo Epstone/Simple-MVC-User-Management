@@ -64,19 +64,20 @@ namespace SimpleMvcUserManagement.Scripts {
         ///   Looks up a localized string similar to &lt;form id=&quot;add-user-form&quot;&gt;
         ///&lt;fieldset&gt;
         ///	&lt;legend&gt;Add User&lt;/legend&gt;
-        ///	&lt;div id=&quot;basic-user-info&quot;&gt;
+        ///	&lt;!--&lt;div id=&quot;basic-user-info&quot;&gt;--&gt;
         ///		&lt;div class=&quot;editor-label&quot;&gt;
         ///			&lt;label for=&quot;tbx-add-username&quot;&gt;
         ///				Name&lt;/label&gt;
         ///		&lt;/div&gt;
         ///		&lt;div class=&quot;editor-field&quot;&gt;
-        ///			&lt;input type=&quot;text&quot; id=&quot;tbx-add-username&quot; placeholder=&quot;User Name&quot; value=&quot;name&quot; /&gt;&lt;/div&gt;
+        ///			&lt;input type=&quot;text&quot; id=&quot;tbx-add-username&quot; placeholder=&quot;e.g. John&quot;/&gt;&lt;/div&gt;
         ///		&lt;div class=&quot;editor-label&quot;&gt;
         ///			&lt;label for=&quot;tbx-add-password&quot;&gt;
         ///				Password&lt;/label&gt;
         ///		&lt;/div&gt;
         ///		&lt;div class=&quot;editor-field&quot;&gt;
-        ///			&lt;input type=&quot;password&quot; id=&quot;tbx-add-password&quot; placeholder=&quot;Password&quot; valu [rest of string was truncated]&quot;;.
+        ///			&lt;input type=&quot;password&quot; id=&quot;tbx-add-password&quot; placeholder=&quot;password&quot;/&gt;
+        ///		&lt;/div&gt; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string add_user_form {
             get {
@@ -91,7 +92,7 @@ namespace SimpleMvcUserManagement.Scripts {
         ///* Copyright (c) 2007 Christian Bach
         ///*/
         ///
-        ///!(function($){$.extend({tablesorter:new function(){var g=[],widgets=[],tbl;this.defaults={cssHeader:&quot;header&quot;,cssAsc:&quot;headerSortUp&quot;,cssDesc:&quot;headerSortDown&quot;,cssChildRow:&quot;expand-child&quot;,sortInitialOrder:&quot;asc&quot;,sortMultiSortKey:&quot;shiftKey&quot;,sortForce:null,sortAppend:null,sortLocaleCompare:false,textExtraction:&quot;simple&quot;,parsers:{},widgets:[],widgetZebra: [rest of string was truncated]&quot;;.
+        ///!(function ($) { $.extend({ tablesorter: new function () { var g = [], widgets = [], tbl; this.defaults = { cssHeader: &quot;header&quot;, cssAsc: &quot;headerSortUp&quot;, cssDesc: &quot;headerSortDown&quot;, cssChildRow: &quot;expand-child&quot;, sortInitialOrder: &quot;asc&quot;, sortMultiSortKey: &quot;shiftKey&quot;, sortForce: null, sortAppend: null, sortLocaleCompare: false, textExtraction:  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string jquery_tablesorter_min {
             get {
@@ -100,17 +101,22 @@ namespace SimpleMvcUserManagement.Scripts {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;form&gt;
+        ///   Looks up a localized string similar to &lt;form id=&quot;manage-roles-form&quot;&gt;
         ///&lt;fieldset&gt;
         ///	&lt;legend&gt;Manage Roles&lt;/legend&gt;
-        ///	&lt;input type=&quot;text&quot; id=&quot;role-name&quot; placeholder=&quot;Rolename&quot;/&gt;
-        ///	&lt;input type=&quot;button&quot; id=&quot;btn-add-role&quot; /&gt;
-        ///	&lt;select id=&quot;add-user-roles&quot; size=&quot;10&quot; class=&quot;role-select-box&quot;&gt;
-        ///	&lt;/select&gt;
-        ///	&lt;input type=&quot;button&quot; id=&quot;btn-delete-role&quot; /&gt;
-        ///&lt;/fieldset&gt;
-        ///&lt;/form&gt;
-        ///.
+        ///	&lt;div class=&quot;editor-label&quot;&gt;
+        ///		&lt;label for=&quot;role-name&quot;&gt;
+        ///			Rolename&lt;/label&gt;&lt;/div&gt;
+        ///	&lt;div class=&quot;editor-field&quot;&gt;
+        ///		&lt;input type=&quot;text&quot; id=&quot;role-name&quot; placeholder=&quot;e.g. test&quot; /&gt;&lt;/div&gt;
+        ///	&lt;input type=&quot;button&quot; id=&quot;btn-add-role&quot; value=&quot;Add Role&quot; /&gt;
+        ///	&lt;div class=&quot;editor-label&quot;&gt;
+        ///		All roles&lt;/div&gt;
+        ///	&lt;div class=&quot;editor-field&quot;&gt;
+        ///		&lt;select id=&quot;add-user-roles&quot; size=&quot;10&quot; class=&quot;role-select-box&quot;&gt;
+        ///		&lt;/select&gt;
+        ///	&lt;/div&gt;
+        ///	&lt;label for=&quot;allow-populated- [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string manage_roles_form {
             get {
@@ -122,11 +128,14 @@ namespace SimpleMvcUserManagement.Scripts {
         ///   Looks up a localized string similar to 
         ///$(function () {
         ///
-        ///  var userTableArea = new UserTableArea();
-        ///  userTableArea.init(&quot;.simple-user-table&quot;);
-        ///
         ///  var addUserArea = new AddUserArea();
         ///  addUserArea.init(&quot;.simple-user-table&quot;);
+        ///
+        ///  var roleMgmt = new RoleManagement();
+        ///  roleMgmt.init();
+        ///
+        ///  var userTableArea = new UserTableArea();
+        ///  userTableArea.init(&quot;.simple-user-table&quot;);
         ///
         ///});
         ///
@@ -142,8 +151,7 @@ namespace SimpleMvcUserManagement.Scripts {
         ///    // get user table
         ///    userTable = $(tableSelector);
         ///
-        ///    // fill the user table with all 
-        ///    $.post(&apos;/{controllerName}/GetAllUsers&apos;, { [rest of string was truncated]&quot;;.
+        ///    // fill the user  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string simple_user_management {
             get {
@@ -159,9 +167,12 @@ namespace SimpleMvcUserManagement.Scripts {
         ///  background-position: 10px center;
         ///  position: relative;
         ///  color: #00529B;
-        ///  position: absolute;
+        ///  position: fixed;
         ///  top: 0;
         ///  width: 100%;
+        ///  filter:alpha(opacity=95); /* IE */
+        ///-moz-opacity: 0.95; /* Mozilla */
+        ///opacity: 0.95; /* Opera */
         ///}
         ///#simple-user-info.error {
         ///  background-color: Yellow;
@@ -171,16 +182,9 @@ namespace SimpleMvcUserManagement.Scripts {
         ///}
         ///
         ///
-        ///div#basic-user-info{
-        ///  float:left;
-        ///}
-        ///div#choose-roles{
-        ///  margin-left:1em;
-        ///  float:left;
-        ///}
-        ///select#add-user-roles{
-        ///  padding:0 1em;
-        ///}.
+        ///#add-user-form,#manage-roles-form{
+        ///  display:inline-block
+        ///}        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string style {
             get {
@@ -212,20 +216,25 @@ namespace SimpleMvcUserManagement.Scripts {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (function (a) { a.extend({ tablesorterPager: new function () { var b = function (b) { var c = &quot;addClass&quot;, d = &quot;removeClass&quot;, e = b.cssDisabled; if (b.updateArrows) { b.container[b.totalRows &lt; b.size ? c : d](e); a(b.cssFirst + &quot;,&quot; + b.cssPrev, b.container)[b.page === 0 ? c : d](e); a(b.cssNext + &quot;,&quot; + b.cssLast, b.container)[b.page === b.totalPages - 1 ? c : d](e) } }, c = function (c, d) { d.startRow = d.size * d.page + 1; d.endRow = Math.min(d.totalRows, d.size * (d.page + 1)); var e = a(d.cssPageDisplay, [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string tablesorter_pager_min {
+            get {
+                return ResourceManager.GetString("tablesorter_pager_min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /* tables */
         ///table.tablesorter {
-        ///	font-family:arial;
         ///	background-color: #CDCDCD;
         ///	margin:10px 0pt 15px;
-        ///	font-size: 8pt;
         ///	width: 100%;
         ///	text-align: left;
-        ///	color: #3D3D3D;
         ///}
         ///table.tablesorter thead tr th, table.tablesorter tfoot tr th {
         ///	background-color: #e6EEEE !important;
         ///	border: 1px solid #FFF;
-        ///	font-size: 8pt;
         ///	padding: 4px;
         ///}
         ///table.tablesorter thead tr .header {
@@ -237,7 +246,10 @@ namespace SimpleMvcUserManagement.Scripts {
         ///	background-color: #FFF;
         ///	vertical-align: top;
         ///}
-        ///table.tablesorter tbody tr [rest of string was truncated]&quot;;.
+        ///table.tablesorter tbody tr.odd td {
+        ///	background-color:#F0F0F6;
+        ///}
+        ///table.tablesorter thead tr .head [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string tablesorter_style {
             get {
@@ -246,7 +258,7 @@ namespace SimpleMvcUserManagement.Scripts {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;fieldset class=&quot;simple-user-table-fieldset&quot;&gt;
+        ///   Looks up a localized string similar to &lt;fieldset class=&quot;simple-user-table-field&quot;&gt;
         ///&lt;legend&gt;User Table&lt;/legend&gt;
         ///	&lt;table class=&apos;simple-user-table tablesorter&apos;&gt;
         ///		&lt;thead&gt;
@@ -278,7 +290,7 @@ namespace SimpleMvcUserManagement.Scripts {
         ///		&lt;form&gt;
         ///		&lt;button class=&quot;first&quot;&gt;
         ///			&lt;&lt;&lt;/button&gt;
-        ///		&lt;butt [rest of string was truncated]&quot;;.
+        ///		&lt;button  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string user_table_area {
             get {

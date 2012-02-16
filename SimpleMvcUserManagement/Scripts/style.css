@@ -1,6 +1,6 @@
 ﻿#simple-user-info {
   padding: 15px 0;
-  text-align:center;  
+  text-align: center;
   background-repeat: no-repeat;
   background-position: 10px center;
   position: relative;
@@ -8,9 +8,9 @@
   position: fixed;
   top: 0;
   width: 100%;
-  filter:alpha(opacity=95); /* IE */
--moz-opacity: 0.95; /* Mozilla */
-opacity: 0.95; /* Opera */
+  filter: alpha(opacity=95); /* IE */
+  -moz-opacity: 0.95; /* Mozilla */
+  opacity: 0.95; /* Opera */
 }
 #simple-user-info.error {
   background-color: Yellow;
@@ -20,6 +20,6 @@ opacity: 0.95; /* Opera */
 }
 
 
-#add-user-form,#manage-roles-form{
-  display:inline-block
+#add-user-form, #manage-roles-form {
+  display: inline-block;
 }

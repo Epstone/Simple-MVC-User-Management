@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\add-user-form.html" />
+    <Content Include="Scripts\tablesorter-pager-min.js" />
     <Content Include="Scripts\manage-roles-form.html" />
     <Content Include="Scripts\style.css" />
     <Content Include="Scripts\jquery.tablesorter.min.js" />
