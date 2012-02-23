@@ -54,8 +54,14 @@ function UserTableArea() {
 
     e.preventDefault();
 
+
     var id = $(this).data("user-id");
     var row = $(this).closest("tr");
+
+    // cancel user deletion if confirmation is negative
+    var result = confirm("Do you really want to delete the user account for " + $(this).data("user-name") + " ?");
+    if (!result)
+      return;
 
     //delete user by id and check result
     $.post("/{controllerName}/DeleteUser", { userId: id }, function (response) {
@@ -123,7 +129,7 @@ function AddUserArea() {
       email: email,
       roles: roles
     };
-    
+
     //send user creation request to server
     $.ajax({
       type: "POST",
@@ -212,15 +218,22 @@ function RoleManagement() {
 
   }
 
+  /* Event handler for clicking the delete role button*/
   function bindDeleteRoleButtonClick() {
 
     $("#btn-delete-role").click(function (e) {
 
       var selectedOption = roleSelectBox.children(":selected");
 
+      // verify that a role has been selected
       if (selectedOption.length === 1) {
         var rolename = selectedOption.text();
         var allowPopulatedRoleDeletion = $("#allow-populated-role").is(":checked");
+
+        //confirm role deletion
+        var confirmationResult = confirm("Do you really want to delete the role named " + rolename + " ?");
+        if (!confirmationResult) return false;
+
 
         deleteRole(rolename, allowPopulatedRoleDeletion);
 
@@ -250,20 +263,56 @@ function RoleManagement() {
 }
 
 var _myHtml = {
-  /* generates a new user table row as  jquery element */
+
+  /* generates a new user table row as jquery element */
   buildUserTableRow: function (user) {
 
-    return $('<tr>'
-            + '<td>' + user.id + '</td>'
-						+ '<td>' + _myHelper.encodeHtml(user.name) + '</td>'
-            + '<td>' + user.registrationDate + '</td>'
-            + '<td>' + _myHelper.encodeHtml(user.email) + '</td>'
-            + '<td>' + user.isLockedOut + '</td>'
-            + '<td><a data-user-id=' + user.id + ' href="" class="delete-user">Delete</a></td>'
-						+ '</tr>');
+    var userRow = new UserRow();
+    userRow.addCell(user.id);
+    userRow.addCell(user.name);
+    userRow.addCell(user.registrationDate);
+    userRow.addCell(user.email);
+    userRow.addCell(user.isLockedOut);
+
+    //build deletion link and append
+    var $deletionLink = $("<a />").data("user-id", user.id).data("user-name", user.name).addClass("delete-user").text("Delete");
+    userRow.addCellForElem($deletionLink);
+
+    return userRow.getElem();
+
   }
 
 }
+
+/* User Row Object for generating new rows containing user information */
+function UserRow() {
+  var $row = $("<tr />");
+
+  /*Adds a new cell with the specified text */
+  this.addCell = function (text) {
+
+    var $cell = $("<td />");
+    $cell.text(text);
+
+    $row.append($cell);
+  }
+
+  /* Adds a new cell for the specified element */
+  this.addCellForElem = function (elem) {
+
+    var $cell = $("<td />");
+    $cell.append(elem);
+
+    $row.append($cell);
+  }
+
+  /* returns the row element itself */
+  this.getElem = function () {
+    return $row;
+  }
+}
+
+
 
 var _myHelper = {
 
