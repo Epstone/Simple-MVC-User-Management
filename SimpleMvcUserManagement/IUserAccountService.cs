@@ -21,5 +21,7 @@ namespace SimpleMvcUserManagement
     void CreateRole(string roleName);
 
     bool DeleteRole(string roleName, bool throwOnPopulatedRole);
+
+    bool UnlockUser(string userName);
   }
 }

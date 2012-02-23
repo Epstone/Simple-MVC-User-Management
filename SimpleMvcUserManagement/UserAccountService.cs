@@ -78,5 +78,11 @@ namespace SimpleMvcUserManagement
     {
       return _roleProvider.DeleteRole(roleName, throwOnPopulatedRole);
     }
+
+
+    public bool UnlockUser(string userName)
+    {
+      return _membership.UnlockUser(userName);
+    }
   }
 }

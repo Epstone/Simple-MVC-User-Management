@@ -37,7 +37,29 @@ function UserTableArea() {
 
       // bind user link deletion event handler for all rows
       userTable.on('click', '.delete-user', deleteUser);
+      userTable.on("click", ".unlock-user", toggleLockout);
     });
+  }
+
+  /* Event handler for toggling the lockout state of a user */
+  function toggleLockout(e) {
+
+    e.preventDefault();
+
+    var user = $(this).closest("tr").data("user");
+    var lockoutLink = $(this);
+
+    console.log(user);
+    // ask server for switching lockout state
+    $.post("/{controllerName}/UnlockUser", { userName: user.name }, function (response) {
+
+      _myHelper.processServerResponse(response, function () {
+
+        lockoutLink.replaceWith("<span>Just Unlocked</span>");
+
+      });
+    });
+
   }
 
   /* adds a new user to the user table body */
@@ -54,18 +76,16 @@ function UserTableArea() {
 
     e.preventDefault();
 
-
-    var id = $(this).data("user-id");
     var row = $(this).closest("tr");
+    var user = row.data("user");
 
     // cancel user deletion if confirmation is negative
-    var result = confirm("Do you really want to delete the user account for " + $(this).data("user-name") + " ?");
+    var result = confirm("Do you really want to delete the user account for " + user.name + " ?");
     if (!result)
       return;
 
     //delete user by id and check result
-    $.post("/{controllerName}/DeleteUser", { userId: id }, function (response) {
-
+    $.post("/{controllerName}/DeleteUser", { userId: user.id }, function (response) {
 
       _myHelper.processServerResponse(response, function () {
 
@@ -267,15 +287,23 @@ var _myHtml = {
   /* generates a new user table row as jquery element */
   buildUserTableRow: function (user) {
 
-    var userRow = new UserRow();
+    var userRow = new UserRowBuilder(user);
     userRow.addCell(user.id);
     userRow.addCell(user.name);
     userRow.addCell(user.registrationDate);
     userRow.addCell(user.email);
-    userRow.addCell(user.isLockedOut);
+
+    //build lockout element
+    var $lockoutElem;
+    if (!user.isLockedOut)
+      $lockoutElem = $("<span/>").text("Is Unlocked");
+    else
+      $lockoutElem = $("<a />").addClass("unlock-user").text("Unlock Account");
+
+    userRow.addCellForElem($lockoutElem);
 
     //build deletion link and append
-    var $deletionLink = $("<a />").data("user-id", user.id).data("user-name", user.name).addClass("delete-user").text("Delete");
+    var $deletionLink = $("<a />").data("user-name", user.name).addClass("delete-user").text("Delete");
     userRow.addCellForElem($deletionLink);
 
     return userRow.getElem();
@@ -285,8 +313,8 @@ var _myHtml = {
 }
 
 /* User Row Object for generating new rows containing user information */
-function UserRow() {
-  var $row = $("<tr />");
+function UserRowBuilder(user) {
+  var $row = $("<tr />").data("user", user);
 
   /*Adds a new cell with the specified text */
   this.addCell = function (text) {

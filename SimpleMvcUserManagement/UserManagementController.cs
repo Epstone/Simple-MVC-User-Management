@@ -171,12 +171,10 @@ namespace SimpleMvcUserManagement
     public JsonResult DeleteRole(string roleName, bool allowPopulatedRoleDeletion)
     {
       MyJsonResult result;
-      bool isDeleted = false;
 
       try
       {
-        isDeleted = _accountService.DeleteRole(roleName, !allowPopulatedRoleDeletion);
-        if (isDeleted)
+        if (_accountService.DeleteRole(roleName, !allowPopulatedRoleDeletion))
           result = MyJsonResult.CreateSuccess("The role " + roleName + " has been deleted.");
         else
           result = MyJsonResult.CreateError("The role " + roleName + " could not be deleted.");
@@ -185,17 +183,36 @@ namespace SimpleMvcUserManagement
       {
         result = MyJsonResult.CreateError(ex.Message);
       }
-      
+
 
       return Json(result);
     }
 
+    public JsonResult UnlockUser(string userName)
+    {
+      MyJsonResult result;
 
-    const string _isAuthorized ="IsAuthorizedForUserManagement";
+      try
+      {
+        if (_accountService.UnlockUser(userName))
+          result = MyJsonResult.CreateSuccess("The account for " + userName + " has been unlocked");
+        else
+          result = MyJsonResult.CreateError("Could not unlock the account for " + userName);
+      }
+      catch (Exception ex)
+      {
+        result = MyJsonResult.CreateError(ex.Message);
+      }
+
+      return Json( result);
+    }
+
+
+    const string _isAuthorized = "IsAuthorizedForUserManagement";
 
     public static bool IsRequestAuthorized
     {
-      
+
       get
       {
         IDictionary items = System.Web.HttpContext.Current.Items;
