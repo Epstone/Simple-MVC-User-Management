@@ -35,21 +35,40 @@ function UserTableArea() {
       //initialize table sorter and pager
       userTable.tablesorter({ widthFixed: true, widgets: ['zebra'] }).tablesorterPager({ container: $("#pager"), positionFixed: false, removeRows: false });
 
-      // bind user link deletion event handler for all rows
+      // bind user action link event handlers for all rows
       userTable.on('click', '.delete-user', deleteUser);
-      userTable.on("click", ".unlock-user", toggleLockout);
+      userTable.on("click", ".unlock-user", unlockUser);
+      userTable.on("click", ".manage-roles", manageRoles);
     });
   }
 
+  /* Event handler for managing the roles of a user */
+  function manageRoles(e) {
+
+    // hide any other manage roles dialog
+    $(".manage-roles-dialog").fadeOut();
+
+    //build role dialog
+    var dlg = $("<div/>").text("Manage Roles").addClass("manage-roles-dialog").hide();
+
+    $(this).after(dlg);
+    dlg.fadeIn();
+
+    //hide on document click
+    $(document).one("click", function () { dlg.fadeOut() });
+
+    return false;
+  }
+
   /* Event handler for toggling the lockout state of a user */
-  function toggleLockout(e) {
+  function unlockUser(e) {
 
     e.preventDefault();
 
     var user = $(this).closest("tr").data("user");
     var lockoutLink = $(this);
 
-    console.log(user);
+
     // ask server for switching lockout state
     $.post("/{controllerName}/UnlockUser", { userName: user.name }, function (response) {
 
@@ -137,7 +156,6 @@ function AddUserArea() {
       roles[i] = $(selected).text();
     });
 
-    console.log(roles);
     //verify that both passwords are equal
     if (pwd !== pwd2 || pwd === "" || username === "" || email === "") {
       _myHelper.showError("You have missed something or the passwords do not match.");
@@ -293,14 +311,17 @@ var _myHtml = {
     userRow.addCell(user.registrationDate);
     userRow.addCell(user.email);
 
-    //build lockout element
+    //build lockout text or link
     var $lockoutElem;
     if (!user.isLockedOut)
       $lockoutElem = $("<span/>").text("Is Unlocked");
     else
       $lockoutElem = $("<a />").addClass("unlock-user").text("Unlock Account");
-
     userRow.addCellForElem($lockoutElem);
+
+    //build manage roles link
+    $manageRolesLink = $("<a />").addClass("manage-roles").text("Manage Roles");
+    userRow.addCellForElem($manageRolesLink);
 
     //build deletion link and append
     var $deletionLink = $("<a />").data("user-name", user.name).addClass("delete-user").text("Delete");
