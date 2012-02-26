@@ -16,6 +16,8 @@ namespace SimpleMvcUserManagement
 
     string[] GetAllRoles();
 
+    string[] GetRolesForUser(string username);
+
     void AddUserToRoles(MembershipUser user, string[] roles);
 
     void CreateRole(string roleName);
@@ -23,5 +25,6 @@ namespace SimpleMvcUserManagement
     bool DeleteRole(string roleName, bool throwOnPopulatedRole);
 
     bool UnlockUser(string userName);
+
   }
 }

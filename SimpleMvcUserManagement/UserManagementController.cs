@@ -188,6 +188,11 @@ namespace SimpleMvcUserManagement
       return Json(result);
     }
 
+    /// <summary>
+    /// Unlocks the user by the specified username.
+    /// </summary>
+    /// <param name="userName">The user to unlock</param>
+    /// <returns>Success or error information</returns>
     public JsonResult UnlockUser(string userName)
     {
       MyJsonResult result;
@@ -204,7 +209,28 @@ namespace SimpleMvcUserManagement
         result = MyJsonResult.CreateError(ex.Message);
       }
 
-      return Json( result);
+      return Json(result);
+    }
+
+    public JsonResult GetUserRoleStatus(string username)
+    {
+
+      var allRoles = this._accountService.GetAllRoles();
+      var userRoles = this._accountService.GetRolesForUser(username);
+
+      var result = new MyJsonResult()
+      {
+        data = from role in allRoles
+               select new {
+                 rolename = role,
+                 isInRole = userRoles.Contains(role)
+               },
+        isSuccess = true,
+        message = "Test"
+      };
+
+
+      return Json(result);
     }
 
 

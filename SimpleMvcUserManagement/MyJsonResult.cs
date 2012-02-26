@@ -8,7 +8,7 @@ namespace SimpleMvcUserManagement
   public class MyJsonResult
   {
 
-    private MyJsonResult()
+    public MyJsonResult()
     {
 
     }

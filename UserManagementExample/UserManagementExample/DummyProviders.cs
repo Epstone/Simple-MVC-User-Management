@@ -20,6 +20,9 @@ namespace UserManagementExample
       //setup DeleteRole()
       roleProvider.Setup(x => x.DeleteRole(It.IsAny<string>(), It.IsAny<bool>())).Returns(true);
 
+      //setup GetRolesForUser()
+      roleProvider.Setup(x=> x.GetRolesForUser(It.IsAny<string>())).Returns(new string[]{"Admins","Users"});
+
       return roleProvider.Object;
     }
 
@@ -32,7 +35,7 @@ namespace UserManagementExample
       // setup CreateUser()
       MembershipCreateStatus membershipCreateStatus = MembershipCreateStatus.Success;
       membershipMock.Setup(x => x.CreateUser(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), null, null, true, null, out membershipCreateStatus))
-          .Returns((string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, MembershipCreateStatus status) => CreateDummyUser(42, username, email, DateTime.Now,false));
+          .Returns((string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, MembershipCreateStatus status) => CreateDummyUser(42, username, email, DateTime.Now, false));
 
       // setup GetAllUsers()
       var total = It.IsAny<int>();
@@ -42,7 +45,7 @@ namespace UserManagementExample
       membershipMock.Setup(x => x.DeleteUser(It.IsAny<string>(), It.IsAny<bool>())).Returns(true);
 
       //setup Get User
-      membershipMock.Setup(x => x.GetUser(It.IsAny<object>(), It.IsAny<bool>())).Returns(CreateDummyUser(42, null, null, DateTime.Now,false));
+      membershipMock.Setup(x => x.GetUser(It.IsAny<object>(), It.IsAny<bool>())).Returns(CreateDummyUser(42, null, null, DateTime.Now, false));
 
       //setup UnlockUser
       membershipMock.Setup(x => x.UnlockUser(It.IsAny<string>())).Returns(true);
@@ -65,8 +68,8 @@ namespace UserManagementExample
         string name = "Dummy User " + i;
         string email = "just@a-dummy" + i + ".com";
         var registrationDate = now.AddMinutes(i * (-1));
-        var isLockedOut = (i%10) == 1 ;
-        var dummyUser = CreateDummyUser(i, name, email, registrationDate,isLockedOut);
+        var isLockedOut = (i % 10) == 1;
+        var dummyUser = CreateDummyUser(i, name, email, registrationDate, isLockedOut);
         users.Add(dummyUser);
       }
       var end = DateTime.Now.Second;

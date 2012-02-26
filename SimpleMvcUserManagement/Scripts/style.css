@@ -28,8 +28,14 @@
  background-color: #CCCCCC;
     border: 1px solid #5C87B2;
     display: block;
-    height: 50px;
+    min-height: 50px;
     min-width: 100px;
     padding: 1em;
     position: absolute;
+}
+ul.role-list{
+  padding-left:0;
+}
+ul.role-list li{
+  list-style-type:none;
 }

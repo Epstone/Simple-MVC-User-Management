@@ -21,7 +21,7 @@ namespace SimpleMvcUserManagement
     public UserAccountService(MembershipProvider membershipProvider, RoleProvider roleProvider)
     {
       this._membership = membershipProvider ?? Membership.Provider;
-      this._roleProvider = roleProvider  ?? Roles.Provider;
+      this._roleProvider = roleProvider ?? Roles.Provider;
     }
 
     public MembershipUserCollection GetAllUsers(int page, int size, out int totalRecords)
@@ -54,13 +54,27 @@ namespace SimpleMvcUserManagement
       return _membership.CreateUser(username, password, email, null, null, true, null, out createStatus);
     }
 
-
+    /// <summary>
+    /// Gets a list of all the roles for the configured applicationName.
+    /// </summary>
+    /// <returns>  A string array containing the names of all the roles stored in the data source
+    ///    for the configured applicationName.</returns>
     public string[] GetAllRoles()
     {
       return _roleProvider.GetAllRoles();
-     
+
     }
 
+    /// <summary>
+    ///  Gets a list of the roles that a specified user is in for the configured applicationName.
+    /// </summary>
+    /// <param name="username">The user to return a list of roles for.</param>
+    /// <returns> A string array containing the names of all the roles that the specified user
+    ///    is in for the configured applicationName.</returns>
+    public string[] GetRolesForUser(string username)
+    {
+      return _roleProvider.GetRolesForUser(username);
+    }
 
     public void AddUserToRoles(MembershipUser user, string[] roles)
     {
@@ -84,5 +98,8 @@ namespace SimpleMvcUserManagement
     {
       return _membership.UnlockUser(userName);
     }
+
+
+
   }
 }

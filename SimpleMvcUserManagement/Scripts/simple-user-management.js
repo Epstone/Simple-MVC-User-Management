@@ -46,16 +46,56 @@ function UserTableArea() {
   function manageRoles(e) {
 
     // hide any other manage roles dialog
-    $(".manage-roles-dialog").fadeOut();
+    $(".manage-roles-dialog").remove();
 
-    //build role dialog
-    var dlg = $("<div/>").text("Manage Roles").addClass("manage-roles-dialog").hide();
+    var $clickedLink = $(this);
+    var user = $(this).closest("tr").data("user");
 
-    $(this).after(dlg);
-    dlg.fadeIn();
+    console.log("manage roles for " + user.name);
 
-    //hide on document click
-    $(document).one("click", function () { dlg.fadeOut() });
+    // ask server which roles the user is currently in and which else exist
+    $.post("/{controllerName}/GetUserRoleStatus", function (response) {
+
+      // on success do...
+      _myHelper.processServerResponse(response, function () {
+
+        console.log(response.data);
+
+        //build role dialog
+        var dlg = $("<div/>").addClass("manage-roles-dialog").hide();
+        var $roleList = $("<ul />").addClass("role-list");
+
+        var roleInfo = response.data;
+        for (var i in roleInfo) {
+
+          var rolename = roleInfo[i].rolename;
+          var cbxId = "cbx-" + rolename;
+
+          //create a list item, a checkbox, a label foreach role
+
+          var $li = $("<li />");
+          var $cbx = $("<input type='checkbox' />").val(rolename).attr("checked", roleInfo[i].isInRole).attr("id", cbxId);
+          var $label = $("<label />").text(rolename).attr("for", cbxId);
+
+          // append checkbox and label to list item
+          $li.append($cbx).append($label).appendTo($roleList);
+        }
+
+        //append role list to dialog
+        dlg.append($roleList);
+
+        console.log($clickedLink);
+        $clickedLink.after(dlg);
+        dlg.fadeIn();
+
+        //hide on document click
+        $(document).one("click", function (e) { dlg.fadeOut() });
+
+      });
+
+    });
+
+
 
     return false;
   }
@@ -370,7 +410,8 @@ var _myHelper = {
   processServerResponse: function (response, onSuccess, onError) {
 
     if (response.isSuccess) {
-      _myHelper.showSuccess(response.message);
+      if (response.message) // show message only if available
+        _myHelper.showSuccess(response.message);
 
       // call success callback
       if ($.isFunction(onSuccess))
@@ -379,7 +420,9 @@ var _myHelper = {
     } else {
 
       //show error message
-      _myHelper.showError(response.message, "error");
+      if (response.message) // show message only if available
+        _myHelper.showError(response.message, "error");
+
       if ($.isFunction(onError))
         onError.apply();
     }
@@ -405,6 +448,7 @@ var _myHelper = {
 
   /* Shows an error or success notification */
   showMessage: function (message, cssClass) {
+
 
     var $info = _myHelper.infoWindow().addClass(cssClass).text(message);
 
