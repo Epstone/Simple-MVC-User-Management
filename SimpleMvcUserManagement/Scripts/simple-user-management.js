@@ -42,7 +42,7 @@ function UserTableArea() {
     });
   }
 
-  /* Event handler for managing the roles of a user */
+  /* Shows a manage roles dialog with checkboxes for each role if the user clicks on the manage roles action link. */
   function manageRoles(e) {
 
     // hide any other manage roles dialog
@@ -54,7 +54,7 @@ function UserTableArea() {
     console.log("manage roles for " + user.name);
 
     // ask server which roles the user is currently in and which else exist
-    $.post("/{controllerName}/GetUserRoleStatus", function (response) {
+    $.post("/{controllerName}/GetUserRoleStatus", { username: user.name }, function (response) {
 
       // on success do...
       _myHelper.processServerResponse(response, function () {
@@ -62,7 +62,7 @@ function UserTableArea() {
         console.log(response.data);
 
         //build role dialog
-        var dlg = $("<div/>").addClass("manage-roles-dialog").hide();
+        var $dlg = $("<div/>").addClass("manage-roles-dialog").hide();
         var $roleList = $("<ul />").addClass("role-list");
 
         var roleInfo = response.data;
@@ -74,7 +74,7 @@ function UserTableArea() {
           //create a list item, a checkbox, a label foreach role
 
           var $li = $("<li />");
-          var $cbx = $("<input type='checkbox' />").val(rolename).attr("checked", roleInfo[i].isInRole).attr("id", cbxId);
+          var $cbx = $("<input type='checkbox' class='cbx-role' />").val(rolename).attr("checked", roleInfo[i].isInRole).attr("id", cbxId);
           var $label = $("<label />").text(rolename).attr("for", cbxId);
 
           // append checkbox and label to list item
@@ -82,25 +82,53 @@ function UserTableArea() {
         }
 
         //append role list to dialog
-        dlg.append($roleList);
+        $dlg.append($roleList);
 
-        console.log($clickedLink);
-        $clickedLink.after(dlg);
-        dlg.fadeIn();
+        $clickedLink.after($dlg);
+        $dlg.fadeIn();
 
-        //hide on document click
-        $(document).one("click", function (e) { dlg.fadeOut() });
+        //bind add or remove role for the created checkboxes
+        $dlg.find(".cbx-role").change(function (e) {
+
+          e.stopPropagation();
+
+          var data = {
+            rolename: $(this).val(),
+            isInRole: $(this).is(":checked"),
+            username: user.name
+          };
+
+          // start adding or removing the role for the given user
+          addRemoveRoleForUser(data);
+
+        });
+
+        //hide manage roles dialog on document click but not on a click inside the dialog
+        $dlg.on("click", function (e) { e.stopPropagation() });
+        $(document).one("click", function (e) { $dlg.fadeOut() });
+
 
       });
 
     });
 
-
-
     return false;
   }
 
-  /* Event handler for toggling the lockout state of a user */
+  /* Adds or removes a role for a user */
+  function addRemoveRoleForUser(data) {
+
+    $.post("/{controllerName}/AddRemoveRoleForUser", data, function (response) {
+
+      _myHelper.processServerResponse(response);
+
+    });
+
+
+  }
+
+
+  /* Unlocks the user account when the unlock user link is clicked*/
   function unlockUser(e) {
 
     e.preventDefault();
@@ -114,6 +142,7 @@ function UserTableArea() {
 
       _myHelper.processServerResponse(response, function () {
 
+        //on success replace link with success info
         lockoutLink.replaceWith("<span>Just Unlocked</span>");
 
       });
@@ -121,7 +150,7 @@ function UserTableArea() {
 
   }
 
-  /* adds a new user to the user table body */
+  /* Adds a new user to the user table body */
   function appendUser(user) {
 
     // build row and append to table
@@ -130,7 +159,7 @@ function UserTableArea() {
 
   }
 
-  /* deletes a user through the membership service and the according row in the user table. */
+  /* Deletes a user through the membership service and the according row in the user table. */
   function deleteUser(e) {
 
     e.preventDefault();
@@ -177,7 +206,7 @@ function AddUserArea() {
     if (!$("#add-user-form"))
       return;
 
-    // add user button eventhandler
+    // binds the add user buttons click event to the create user function
     $("#btn-create-user").click(createUser);
 
 
@@ -262,10 +291,10 @@ function RoleManagement() {
     roleSelectBox.append($("<option value=" + role + ">" + role + "</option>"));
   }
 
+  /* Starts the role creation process when the add role button is clicked */
   function bindAddRoleButtonClick() {
 
     $("#btn-add-role").click(function (e) {
-
 
       var rolename = $("#role-name").val();
 
@@ -283,11 +312,13 @@ function RoleManagement() {
 
   }
 
+  /* Sends a role creation request to the server */
   function addRole(roleName) {
 
     $.post("/{controllerName}/CreateRole", { roleName: roleName }, function (response) {
       _myHelper.processServerResponse(response, function () {
 
+        //on success add the role to the selectbox
         addRoleToRoleSelectBox(roleName);
 
       });
@@ -296,7 +327,7 @@ function RoleManagement() {
 
   }
 
-  /* Event handler for clicking the delete role button*/
+  /* Handles the delete role button click event */
   function bindDeleteRoleButtonClick() {
 
     $("#btn-delete-role").click(function (e) {
@@ -312,7 +343,7 @@ function RoleManagement() {
         var confirmationResult = confirm("Do you really want to delete the role named " + rolename + " ?");
         if (!confirmationResult) return false;
 
-
+        // delete the role
         deleteRole(rolename, allowPopulatedRoleDeletion);
 
       } else {
@@ -452,7 +483,12 @@ var _myHelper = {
 
     var $info = _myHelper.infoWindow().addClass(cssClass).text(message);
 
-    $info.fadeIn(1000).on("mouseover", fadeOutInfoWindow).delay(4000).fadeOut();
+    //show info message
+    $info.fadeIn(1000).on("mouseover", fadeOutInfoWindow);
+
+    //hide after 4 seconds and on one document click
+    setTimeout(function () { fadeOutInfoWindow(); }, 4000);
+    $(document).one("click", fadeOutInfoWindow)
 
     //fadeOut info window
     function fadeOutInfoWindow() {

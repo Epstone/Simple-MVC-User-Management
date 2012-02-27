@@ -15,10 +15,20 @@ namespace SimpleMvcUserManagement
   [UserManagementAuthorization]
   public class UserManagementController : Controller
   {
-
+    /// <summary>
+    /// You can define the used membership provider by setting this Property.
+    /// </summary>
     public static MembershipProvider MembershipProvider { get; set; }
+
+    /// <summary>
+    /// You can define the used role provider by setting this Property.
+    /// </summary>
     public static RoleProvider RoleProvider { get; set; }
-    IUserAccountService _accountService { get; set; }
+
+    /// <summary>
+    /// The account service which should be used for any provider interaction
+    /// </summary>
+    public IUserAccountService _accountService { get; set; }
 
     public static void RegisterMe()
     {
@@ -212,8 +222,15 @@ namespace SimpleMvcUserManagement
       return Json(result);
     }
 
+    /// <summary>
+    /// Gets a list of roles including the information wether the user is in that role or not.
+    /// </summary>
+    /// <param name="username">The user which role information should be gathered.</param>
+    /// <returns>A list of roles including the information wether the user is in that role or not.</returns>
     public JsonResult GetUserRoleStatus(string username)
     {
+      if (string.IsNullOrEmpty(username))
+        throw new ArgumentException("No user name specified in request");
 
       var allRoles = this._accountService.GetAllRoles();
       var userRoles = this._accountService.GetRolesForUser(username);
@@ -221,21 +238,51 @@ namespace SimpleMvcUserManagement
       var result = new MyJsonResult()
       {
         data = from role in allRoles
-               select new {
+               select new
+               {
                  rolename = role,
                  isInRole = userRoles.Contains(role)
                },
-        isSuccess = true,
-        message = "Test"
+        isSuccess = true
       };
 
 
       return Json(result);
     }
 
+    /// <summary>
+    /// Adds or removes a role for a user account.
+    /// </summary>
+    /// <param name="username">The user which roles should be modified.</param>
+    /// <param name="rolename">The role which should be added or removed.</param>
+    /// <param name="isInRole">The new role status for the user account. If false, the role will be deleted for the user account.</param>
+    /// <returns></returns>
+    public JsonResult AddRemoveRoleForUser(string username, string rolename, bool isInRole)
+    {
+      MyJsonResult result;
+
+      try
+      {
+        _accountService.AddRemoveRoleForUser(username, rolename, isInRole);
+
+        var action = isInRole ? "added" : "removed";
+        var msg = string.Format("The role {0} has been {1} for user {2}.", rolename, action, username);
+
+        result = MyJsonResult.CreateSuccess(msg);
+      }
+      catch (ArgumentException ex)
+      {
+        result = MyJsonResult.CreateError("Could not remove role for user: " + ex.Message);
+      }
+
+      return Json(result);
+    }
 
     const string _isAuthorized = "IsAuthorizedForUserManagement";
 
+    /// <summary>
+    /// Handles user authorization to access the user account management controller methods for each single HTTP Request. 
+    /// </summary>
     public static bool IsRequestAuthorized
     {
 

@@ -101,5 +101,15 @@ namespace SimpleMvcUserManagement
 
 
 
+
+
+    public void AddRemoveRoleForUser(string username, string rolename, bool isInRole)
+    {
+
+      if (isInRole)
+        _roleProvider.AddUsersToRoles(new string[] { username }, new string[] { rolename });
+      else
+        _roleProvider.RemoveUsersFromRoles(new string[] { username }, new string[] { rolename });
+    }
   }
 }
