@@ -6,7 +6,8 @@ One controller is included which provides the membership and role information.
 
 *Please note that this solution is ajax only and all membership and role information is rendered on the client through javascript.*
 
-**Current State:** *alpha*
+**Current State:** *alpha*   
+**Version:** 0.1.0
 
 ##Features:
 - Paged user list by using mottie's tablsorter fork and pager plugin (included in MyHtmlHelper)
@@ -18,13 +19,16 @@ One controller is included which provides the membership and role information.
 - Any membership or roleprovider can be used
 
 ##Dependencies
-- jQuery 1.7
+- >= jQuery 1.7
+- ASP.NET MVC2 or 3
  
 ## Demo
 You can watch a demo of the latest development version at [http://usermanagementdemo.apphb.com](http://usermanagementdemo.apphb.com "http://usermanagementdemo.apphb.com").  
 (The providers used for the demo are incomplete dummies, so you won't see the real membership provider behavior in all cases.
 
 ## How to use in your project 
+**Add a reference to the SimpleMVCUserManagement.dll**
+
 **Include routing and authorization code**
 
 ```csharp
