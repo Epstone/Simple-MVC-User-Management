@@ -309,5 +309,25 @@ namespace SimpleMvcUserManagement
         }
       }
     }
+
+    const string userMgmtControllerName = "UserManagement";
+
+    /// <summary>
+    /// Checks wether the user management controller is the target for the current request
+    /// </summary>
+    /// <returns>Returns true if the user management controller will be called in the current request</returns>
+    public static bool IsTargeted()
+    {
+      HttpContext context = System.Web.HttpContext.Current;
+      RouteData routeData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(context));
+
+      if (routeData != null)
+      {
+        string controllerName = routeData.Values["controller"].ToString();
+        return (userMgmtControllerName == controllerName);
+      }
+
+      return false;
+    }
   }
 }

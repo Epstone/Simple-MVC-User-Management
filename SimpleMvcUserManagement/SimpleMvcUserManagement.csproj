@@ -70,9 +70,6 @@
     <Content Include="Scripts\tablesorter-pager.js" />
     <Content Include="Scripts\tablesorter-style.css" />
     <Content Include="Scripts\user-table-area.html" />
-    <Content Include="temp.html">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Scripts\ScriptPack.resx">

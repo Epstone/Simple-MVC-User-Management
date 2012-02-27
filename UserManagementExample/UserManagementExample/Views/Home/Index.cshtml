@@ -1,17 +1,22 @@
 ﻿@{
 	ViewBag.Title = "Home Page";
-	ViewBag.HeadScripts = SimpleMvcUserManagement.MyHtml.TableJavaScript();
-	ViewBag.HeadStyle = new HtmlString(MyHtml.TableCss().ToString() + MyHtml.StyleCss().ToString());
 }
 <h2>@ViewBag.Message</h2>
 <p>
 	Here you can see the widgets for managing user accounts and roles.
-	@SimpleMvcUserManagement.MyHtml.UserTableArea()
+	@MyHtml.UserTableArea()
 	<div style="float: left; margin-right: 1em;">
-		@SimpleMvcUserManagement.MyHtml.AddUserForm()
+		@MyHtml.AddUserForm()
 	</div>
 	<div style="float: left">
-		@SimpleMvcUserManagement.MyHtml.ManageRolesForm()
+		@MyHtml.ManageRolesForm()
 	</div>
 	<br style="clear: both" />
 </p>
+
+@*css code should be in head section normally?!*@
+@MyHtml.TableCss() @*optional - basic tablesorter styling*@
+@MyHtml.StyleCss() @*recommended - info message and layout styles*@
+
+@MyHtml.UiJavascript() @*required - user interface script*@
+

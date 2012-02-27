@@ -51,15 +51,11 @@ function UserTableArea() {
     var $clickedLink = $(this);
     var user = $(this).closest("tr").data("user");
 
-    console.log("manage roles for " + user.name);
-
     // ask server which roles the user is currently in and which else exist
     $.post("/{controllerName}/GetUserRoleStatus", { username: user.name }, function (response) {
 
       // on success do...
       _myHelper.processServerResponse(response, function () {
-
-        console.log(response.data);
 
         //build role dialog
         var $dlg = $("<div/>").addClass("manage-roles-dialog").hide();

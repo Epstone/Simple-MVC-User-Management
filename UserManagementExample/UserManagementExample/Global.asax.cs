@@ -48,10 +48,14 @@ namespace UserManagementExample
     }
     protected void Application_AuthenticateRequest()
     {
-      // allow or deny requests to the user management controller
-      UserManagementController.IsRequestAuthorized = true;
+      // check if the user management controller is the target controller for this request
+      if (UserManagementController.IsTargeted())
+      {
+        // Do any custom authorization checks here (e.g. Roles.IsUserInRole("Admin")) 
+        UserManagementController.IsRequestAuthorized = true;
+      }
     }
 
-    
+
   }
 }

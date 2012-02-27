@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 namespace SimpleMvcUserManagement
 {
   /// <summary>
-  /// Static Html Generator for building the static user interface html and the required javascript code.
+  /// Static Html Generator for building the user interface html, javascript and css code.
   /// </summary>
   public static class MyHtml
   {
@@ -28,7 +28,7 @@ namespace SimpleMvcUserManagement
     }
 
     /// <summary>
-    /// Builds the add user form for creating new user accounts.
+    /// (recommended) Builds the add user form for creating new user accounts.
     /// </summary>
     /// <returns>(recommended) Add user form html code</returns>
     public static IHtmlString AddUserForm()
@@ -53,7 +53,7 @@ namespace SimpleMvcUserManagement
     /// Required: Builds three javascript blocks containing the tablesorter, pager plugin and the main ui/ajax javascript code.
     /// </summary>
     /// <returns>(required) Javascript code for generating the user interface.</returns>
-    public static IHtmlString TableJavaScript()
+    public static IHtmlString UiJavascript()
     {
       var builder = new StringBuilder();
       builder.AppendFormat(_javascriptBlock, ScriptPack.jquery_tablesorter_min);
@@ -65,7 +65,7 @@ namespace SimpleMvcUserManagement
     }
 
     /// <summary>
-    /// Builds a table styling css block. Could be used as starting point for custom styles. Optional, put in head section.
+    /// (optional) Builds a table styling css block. Could be used as starting point for custom styles. Optional, put in head section.
     /// </summary>
     /// <returns>(optional) A basic css style block for the user table.</returns>
     public static IHtmlString TableCss()
@@ -77,7 +77,7 @@ namespace SimpleMvcUserManagement
     }
 
     /// <summary>
-    /// Builds a basic layout style css block. It mainly contains css for the info-message overlay and some form styling.
+    /// (recommended) Builds a basic layout style css block. It mainly contains css for the info-message overlay and some form styling.
     /// </summary>
     /// <returns>(recommended) Basic style css block</returns>
     public static IHtmlString StyleCss()

@@ -162,7 +162,7 @@ namespace SimpleMvcUserManagement.Scripts {
         /// <summary>
         ///   Looks up a localized string similar to #simple-user-info {
         ///  padding: 15px 0;
-        ///  text-align:center;  
+        ///  text-align: center;
         ///  background-repeat: no-repeat;
         ///  background-position: 10px center;
         ///  position: relative;
@@ -170,9 +170,9 @@ namespace SimpleMvcUserManagement.Scripts {
         ///  position: fixed;
         ///  top: 0;
         ///  width: 100%;
-        ///  filter:alpha(opacity=95); /* IE */
-        ///-moz-opacity: 0.95; /* Mozilla */
-        ///opacity: 0.95; /* Opera */
+        ///  filter: alpha(opacity=95); /* IE */
+        ///  -moz-opacity: 0.95; /* Mozilla */
+        ///  opacity: 0.95; /* Opera */
         ///}
         ///#simple-user-info.error {
         ///  background-color: Yellow;
@@ -182,9 +182,8 @@ namespace SimpleMvcUserManagement.Scripts {
         ///}
         ///
         ///
-        ///#add-user-form,#manage-roles-form{
-        ///  display:inline-block
-        ///}        /// [rest of string was truncated]&quot;;.
+        ///#add-user-form, #manage-roles-form {
+        ///  display: inline-bl [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string style {
             get {
@@ -279,6 +278,9 @@ namespace SimpleMvcUserManagement.Scripts {
         ///					LockIn/Out
         ///				&lt;/th&gt;
         ///				&lt;th&gt;
+        ///					Roles
+        ///				&lt;/th&gt;
+        ///				&lt;th&gt;
         ///					Action
         ///				&lt;/th&gt;
         ///			&lt;/tr&gt;
@@ -288,9 +290,7 @@ namespace SimpleMvcUserManagement.Scripts {
         ///	&lt;/table&gt;
         ///	&lt;div id=&quot;pager&quot; class=&quot;tablesorter pager&quot;&gt;
         ///		&lt;form&gt;
-        ///		&lt;button class=&quot;first&quot;&gt;
-        ///			&lt;&lt;&lt;/button&gt;
-        ///		&lt;button  [rest of string was truncated]&quot;;.
+        ///		&lt;button class=&quot;fi [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string user_table_area {
             get {
