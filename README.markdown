@@ -68,7 +68,7 @@ You can watch a demo of the latest development version at [http://usermanagement
 	@MyHtml.StyleCss() @*recommended - info message and some layout css styles*@
 	
 	@*javascript*@
-	@MyHtml.UiJavascript() @*required - user interface javascript code including tablesorter, pager and jQuery ui code*@
+	@MyHtml.UiJavascript() @*required - user interface javascript code including tablesorter, pager and user interface code*@
 	
 
 *Licence: Under MIT or GPL licenses, just pick one.*
