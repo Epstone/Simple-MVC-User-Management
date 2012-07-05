@@ -373,26 +373,28 @@ var _myHtml = {
   buildUserTableRow: function (user) {
 
     var userRow = new UserRowBuilder(user);
-    userRow.addCell(user.id);
-    userRow.addCell(user.name);
-    userRow.addCell(user.registrationDate);
-    userRow.addCell(user.email);
+    userRow.addCell(user.id,"user-id");
+    userRow.addCell(user.name,"user-name");
+    userRow.addCell(user.registrationDate,"reg-date");
+    userRow.addCell(user.email,"email");
 
     //build lockout text or link
     var $lockoutElem;
-    if (!user.isLockedOut)
+    if (!user.isLockedOut) {
       $lockoutElem = $("<span/>").text("Is Unlocked");
-    else
+    }
+    else {
       $lockoutElem = $("<a />").addClass("unlock-user").text("Unlock Account");
-    userRow.addCellForElem($lockoutElem);
+    }
+    userRow.addCellForElem($lockoutElem, "lock-state");
 
     //build manage roles link
     $manageRolesLink = $("<a />").addClass("manage-roles").text("Manage Roles");
-    userRow.addCellForElem($manageRolesLink);
+    userRow.addCellForElem($manageRolesLink,"edit-roles");
 
     //build deletion link and append
     var $deletionLink = $("<a />").data("user-name", user.name).addClass("delete-user").text("Delete");
-    userRow.addCellForElem($deletionLink);
+    userRow.addCellForElem($deletionLink, "action");
 
     return userRow.getElem();
 
@@ -405,19 +407,25 @@ function UserRowBuilder(user) {
   var $row = $("<tr />").data("user", user);
 
   /*Adds a new cell with the specified text */
-  this.addCell = function (text) {
+  this.addCell = function (text, cssClass) {
 
     var $cell = $("<td />");
     $cell.text(text);
+
+    //add cell css class
+    $cell.addClass(cssClass);
 
     $row.append($cell);
   }
 
   /* Adds a new cell for the specified element */
-  this.addCellForElem = function (elem) {
+  this.addCellForElem = function (elem, cssClass) {
 
     var $cell = $("<td />");
     $cell.append(elem);
+
+    //add cell css class
+    $cell.addClass(cssClass);
 
     $row.append($cell);
   }

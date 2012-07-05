@@ -6,8 +6,7 @@ One controller is included which provides the membership and role information.
 
 *Please note that this solution is ajax only and all membership and role information is rendered on the client through javascript.*
 
-**Current State:** *alpha*   
-**Version:** 0.1.0
+**Latest Version:** 0.1.1
 
 ##Features:
 - Paged user list by using mottie's tablsorter fork and pager plugin (included in MyHtmlHelper)
@@ -74,5 +73,8 @@ You can watch a demo of the latest development version at [http://usermanagement
 	@*javascript*@
 	@MyHtml.UiJavascript() @*required - user interface javascript code including tablesorter, pager and user interface code*@
 	
+##Changes
+**0.1.1**
+Added css classes for the user table
 
 *Licence: Under MIT or GPL licenses, just pick one.*
