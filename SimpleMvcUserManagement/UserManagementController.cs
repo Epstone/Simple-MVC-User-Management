@@ -94,7 +94,7 @@ namespace SimpleMvcUserManagement
     /// </summary>
     /// <param name="userId">The id of the user account which should be deleted.</param>
     /// <returns>Result info for the user account deletion action.</returns>
-    public JsonResult DeleteUser(string userId)
+    public JsonResult DeleteUser(object userId)
     {
       MyJsonResult result;
 
