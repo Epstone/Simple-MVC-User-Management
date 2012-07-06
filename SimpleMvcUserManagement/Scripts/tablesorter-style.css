@@ -1,33 +1,37 @@
 /* tables */
-table.tablesorter {
+.simple-user-table {
 	background-color: #CDCDCD;
 	margin:10px 0pt 15px;
 	width: 100%;
 	text-align: left;
 }
-table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+.simple-user-table thead tr th, .simple-user-table tfoot tr th {
 	background-color: #e6EEEE !important;
 	border: 1px solid #FFF;
 	padding: 4px;
 }
-table.tablesorter thead tr .header {
+.simple-user-table thead tr .header {
 	cursor: pointer;
 }
-table.tablesorter tbody td {
+.simple-user-table tbody td {
 	
 	padding: 4px;
 	background-color: #FFF;
 	vertical-align: top;
 }
-table.tablesorter tbody tr.odd td {
+.simple-user-table tbody tr.odd td {
 	background-color:#F0F0F6;
 }
-table.tablesorter thead tr .headerSortUp {
+.simple-user-table thead tr .headerSortUp {
 	border-top:3px dotted #CCC;
 }
-table.tablesorter thead tr .headerSortDown {
+.simple-user-table thead tr .headerSortDown {
 	border-bottom:3px dotted #CCC;
 }
-table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+.simple-user-table thead tr .headerSortDown, .simple-user-table thead tr .headerSortUp {
 background-color: #8dbdd8;
+}
+
+.simple-user-table td a {
+  cursor:pointer;
 }
