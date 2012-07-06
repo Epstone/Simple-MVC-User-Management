@@ -169,7 +169,7 @@ function UserTableArea() {
       return;
 
     //delete user by id and check result
-    $.post("/{controllerName}/DeleteUser", { userId: user.id }, function (response) {
+    $.post("/{controllerName}/DeleteUser", { username: user.name }, function (response) {
 
       _myHelper.processServerResponse(response, function () {
 

@@ -35,5 +35,15 @@ namespace SimpleMvcUserManagement
         isSuccess = false
       };
     }
+
+    internal static MyJsonResult CreateError(Exception ex)
+    {
+      return new MyJsonResult()
+      {
+        message = ex.Message,
+        isSuccess = false,
+        data = new { stacktrace = ex.StackTrace }
+      };
+    }
   }
 }

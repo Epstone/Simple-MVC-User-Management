@@ -94,18 +94,18 @@ namespace SimpleMvcUserManagement
     /// </summary>
     /// <param name="userId">The id of the user account which should be deleted.</param>
     /// <returns>Result info for the user account deletion action.</returns>
-    public JsonResult DeleteUser(object userId)
+    public JsonResult DeleteUser(string username)
     {
       MyJsonResult result;
 
       try
       {
-        _accountService.DeleteUser(userId);
-        result = MyJsonResult.CreateSuccess("The user with the id " + userId + " has been deleted.");
+        _accountService.DeleteUser(username);
+        result = MyJsonResult.CreateSuccess("The user " + username + " has been deleted.");
       }
       catch (Exception ex)
       {
-        result = MyJsonResult.CreateError(ex.Message);
+        result = MyJsonResult.CreateError(ex);
       }
 
       return Json(result);
@@ -166,7 +166,7 @@ namespace SimpleMvcUserManagement
       }
       catch (Exception ex)
       {
-        result = MyJsonResult.CreateError(ex.Message);
+        result = MyJsonResult.CreateError(ex);
       }
 
       return Json(result);

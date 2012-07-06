@@ -11,7 +11,7 @@ namespace SimpleMvcUserManagement
     MembershipUserCollection GetAllUsers(int page, int size, out int totalRecords);
     MembershipUserCollection GetAllUsers();
 
-    void DeleteUser(object userId);
+    void DeleteUser(string username);
     MembershipUser CreateUser(string username, string password, string email, out MembershipCreateStatus createStatus);
 
     string[] GetAllRoles();

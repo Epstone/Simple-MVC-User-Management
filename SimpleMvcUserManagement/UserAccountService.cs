@@ -43,10 +43,9 @@ namespace SimpleMvcUserManagement
     /// Deletes a user all his membership information by User ID.
     /// </summary>
     /// <param name="userId">The users ProviderUserKey</param>
-    public void DeleteUser(object userId)
+    public void DeleteUser(string  username)
     {
-      var userName = this._membership.GetUser(userId, false).UserName;
-      _membership.DeleteUser(userName, true);
+      _membership.DeleteUser(username, true);
     }
 
     public MembershipUser CreateUser(string username, string password, string email, out MembershipCreateStatus createStatus)
