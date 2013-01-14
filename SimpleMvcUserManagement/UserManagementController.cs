@@ -230,7 +230,9 @@ namespace SimpleMvcUserManagement
     public JsonResult GetUserRoleStatus(string username)
     {
       if (string.IsNullOrEmpty(username))
+      {
         throw new ArgumentException("No user name specified in request");
+      }
 
       var allRoles = this._accountService.GetAllRoles();
       var userRoles = this._accountService.GetRolesForUser(username);
@@ -321,10 +323,13 @@ namespace SimpleMvcUserManagement
       HttpContext context = System.Web.HttpContext.Current;
       RouteData routeData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(context));
 
-      if (routeData != null)
+      if (routeData != null
+          && routeData.Values != null)
       {
-        string controllerName = routeData.Values["controller"].ToString();
-        return (userMgmtControllerName == controllerName);
+        object controllerName = string.Empty;
+        bool hasController = routeData.Values.TryGetValue("controller", out controllerName);
+
+        return (hasController && userMgmtControllerName == (controllerName as string));
       }
 
       return false;
